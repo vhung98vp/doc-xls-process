@@ -32,7 +32,7 @@ def process_message(msg_key, msg):
         data = json.loads(msg)
         folder = data.get("folder")
         file_key = data.get("file")
-        detect_type = data.get("type", '2')
+        detect_type = data.get("type", '3')
         if detect_type not in ['0', '1', '2', '3']:
             raise ValueError(f"Invalid input type: {data}")
         if folder:

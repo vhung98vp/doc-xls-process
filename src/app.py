@@ -25,7 +25,7 @@ def upload_file():
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
 
-    detect_type = request.args.get('type', '2')
+    detect_type = request.args.get('type', '3')
     if detect_type not in ['0', '1', '2', '3']:
         return jsonify({"error": "Invalid type. Must be 0, 1, 2 or 3."}), 400
     
