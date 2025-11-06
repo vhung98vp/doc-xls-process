@@ -94,7 +94,7 @@ def read_file(file_path):
 
 def make_avatar_file(file_path):
     basename = os.path.basename(file_path)
-    filename, ext = os.path.splitext(filename)
+    filename, _ = os.path.splitext(filename)
     output_dir = os.path.dirname(file_path)
 
     subprocess.run([

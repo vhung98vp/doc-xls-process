@@ -15,25 +15,25 @@ def get_table_ids(cell_info):
 
     filtered = [[row[j] for j in cols] for row in table]
     result = [row for row in filtered if any(cell != "" for cell in row)]
-    return result
+    return result if result and len(result[0]) > 1 else []
 
-def content_to_text(content):
-    texts = []
+def content_to_ids(content):
+    # texts = []
     ids = []
     table_ids = []
     for item in content:
         if 'cells' in item:
-            texts.append('\n'.join(['|'.join(row) for row in item['cells']]))
+            # texts.append('\n'.join(['|'.join(row) for row in item['cells']]))
             tid = get_table_ids(item['cells'])
             table_ids.extend(tid)
             ids.extend([i for row in tid for i in row if i])
         elif 'text' in item:
-            texts.append("\n".join(item.get('text', '')))
+            # texts.append("\n".join(item.get('text', '')))
             ids.extend(filter_ids_text(item.get('text', '')))
         else:
-            texts.append(item)
+            # texts.append(item)
             ids.extend(filter_ids_text(item))
 
-    full_text = '\n'.join(texts)
+    # full_text = '\n'.join(texts)
     ids = list(set(ids))
-    return full_text, ids, table_ids
+    return ids, table_ids

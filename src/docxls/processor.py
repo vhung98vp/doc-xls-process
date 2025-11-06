@@ -1,6 +1,6 @@
 import os
 from .funcs import convert_to_new_format, read_docx, read_xlsx, read_csv, read_txt, make_avatar_file
-from .utils import content_to_text, build_doc_uid
+from .utils import content_to_ids, build_doc_uid
 from s3 import WClient
 from config import get_logger, KAFKA
 logger = get_logger(__name__)
@@ -39,12 +39,28 @@ def process_file(file_path, detect_type=2, s3_key=""):
             logger.error(f"Unsupported file type: {file_path}")
             return None
         
-        full_text, ids, table_ids = content_to_text(file_content)
+        ids, table_ids = content_to_ids(file_content)
+        content_cells = [{"cells": item["cells"]} for item in file_content if "cells" in item]
+        content_text = [{"text": item["text"]} for item in file_content if "text" in item]
+        if detect_type == 0:
+            content = content_cells
+        elif detect_type == 1:
+            content = content_text
+        elif detect_type == 2:
+            content = file_content
+        else:
+            content = ""
+        
+        if "text" in file_content[0]:
+            title = '\n'.join(content[0].get("text", [""])[:3])
+        else: 
+            title = '|'.join(content[0].get("cells", [""])[0])
+
         result = {
                 "file_name": filename,
-                # "title": title,
-                "content": file_content,
-                "full_text": full_text,
+                "title": title,
+                "content": content,
+                # "full_text": full_text,
                 "ids": ids,
                 "table_ids": table_ids,
             }
