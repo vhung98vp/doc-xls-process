@@ -81,7 +81,7 @@ def process_file(file_path, detect_type=2, s3_key=""):
         try:
             if os.path.exists(file_path):
                 os.remove(file_path)
-            if os.path.exists(avatar_path):
+            if s3_key and os.path.exists(avatar_path):
                 os.remove(avatar_path)
         except Exception as e:
             logger.warning(f"Error cleaning up temporary files: {e}")
