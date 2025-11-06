@@ -14,7 +14,7 @@ def get_table_ids(cell_info):
     # Filer rows and cols without text
 
     filtered = [[row[j] for j in cols] for row in table]
-    result = [row for row in filtered if any(cell != "" for cell in row)]
+    result = [row for row in filtered if sum(cell != "" for cell in row) >= 2]
     return result if result and len(result[0]) > 1 else []
 
 def content_to_ids(content):
