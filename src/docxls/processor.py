@@ -52,9 +52,9 @@ def process_file(file_path, detect_type=2, s3_key=""):
             content = ""
         
         if "text" in file_content[0]:
-            title = '\n'.join(content[0].get("text", [""])[:3])
+            title = '\n'.join(file_content[0].get("text", [""])[:3])
         else: 
-            title = '|'.join(content[0].get("cells", [""])[0])
+            title = '|'.join(file_content[0].get("cells", [""])[0])
 
         result = {
                 "file_name": filename,
