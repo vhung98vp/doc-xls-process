@@ -22,7 +22,7 @@ def process_file(file_path, detect_type=2, s3_key=""):
     filename = os.path.basename(file_path)
     _, ext = os.path.splitext(filename)
     ext = ext.lower()
-    file_content, title, avatar_key = [], "", ""
+    file_content, title, avatar_key, avatar_path = [], "", "", ""
     doc_id = build_doc_uid(s3_key)
 
     try:
