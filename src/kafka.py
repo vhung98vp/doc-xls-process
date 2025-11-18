@@ -22,7 +22,7 @@ def process_s3_file(key, detect_type, folder=None):
         send_output_to_kafka(result)
         return result[KAFKA["doc_id_key"]]
     except Exception as e:
-        logger.error(f"Got error while processing file {key}")
+        logger.error(f"Got error while processing file {key}: {e}")
         return None
 
 
