@@ -1,6 +1,11 @@
 FROM python:3.12-slim
 
-RUN apt-get update && apt-get install -y libreoffice && apt-get clean
+RUN apt-get update && apt-get install -y \
+    libreoffice \
+    fonts-dejavu \
+    libxext6 libxrender1 libxinerama1 libfreetype6 \
+    ghostscript \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 # RUN apt-get update && \
 #     apt-get install -y --no-install-recommends \
 #         libreoffice-core libreoffice-writer libreoffice-calc libreoffice-common libreoffice-java-common \
