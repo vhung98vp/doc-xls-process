@@ -93,8 +93,8 @@ def read_file(file_path):
     return pages
 
 def make_avatar_file(file_path):
-    basename = os.path.basename(file_path)
-    filename, _ = os.path.splitext(basename)
+    filename = os.path.basename(file_path)
+    name, _ = os.path.splitext(filename)
     output_dir = os.path.dirname(file_path)
 
     subprocess.run([
@@ -105,7 +105,6 @@ def make_avatar_file(file_path):
         file_path
     ], check=True)
     
-    filename = os.path.splitext(os.path.basename(file_path))[0]
-    png_path = os.path.join(output_dir, f"{filename}.png")
-    logger.info(f"✅ Avatar created for file {basename}: {png_path}")
+    png_path = os.path.join(output_dir, f"{name}.png")
+    logger.info(f"✅ Avatar created for file {filename}: {png_path}")
     return png_path
