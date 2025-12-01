@@ -67,7 +67,7 @@ def process_file(file_path, detect_type=2, s3_key=""):
         
         if s3_key:
             avatar_path = make_avatar_file(file_path)
-            avatar_key = upload_avatar(file_path, filename, doc_id)
+            avatar_key = upload_avatar(avatar_path, filename, doc_id)
             result.update({
                 KAFKA["doc_id_key"]: doc_id,
                 "s3_path": s3_key,
